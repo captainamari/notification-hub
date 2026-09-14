@@ -10,7 +10,6 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from app.config import Settings
 
-
 _bearer = HTTPBearer(auto_error=False)
 _security_dependency = Security(_bearer)
 
