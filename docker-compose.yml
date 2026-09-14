@@ -1,0 +1,17 @@
+services:
+  notification-hub:
+    build: .
+    container_name: notification-hub
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      # Keep the application private; terminate HTTPS in Nginx/Caddy.
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
