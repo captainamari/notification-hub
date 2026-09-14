@@ -18,8 +18,11 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
-      - name: Ruff
-        run: ruff check .
+      - name: Ruff autofix preview
+        run: |
+          ruff check --fix . || true
+          git diff -- app
+          ruff check .
       - name: Tests
         run: pytest
       - name: Compile

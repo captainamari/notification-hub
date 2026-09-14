@@ -12,6 +12,7 @@ from app.config import Settings
 
 
 _bearer = HTTPBearer(auto_error=False)
+_security_dependency = Security(_bearer)
 
 
 class SlidingWindowRateLimiter:
@@ -40,7 +41,7 @@ def get_settings_from_request(request: Request) -> Settings:
 
 async def require_api_token(
     request: Request,
-    credentials: HTTPAuthorizationCredentials | None = Security(_bearer),
+    credentials: HTTPAuthorizationCredentials | None = _security_dependency,
 ) -> None:
     settings = get_settings_from_request(request)
     if (

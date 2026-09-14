@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     route_critical: str = "telegram,email"
 
     @model_validator(mode="after")
-    def normalize_channels(self) -> "Settings":
+    def normalize_channels(self) -> Settings:
         self.default_channel = self.default_channel.strip().lower()
         return self
 
